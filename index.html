@@ -8,18 +8,16 @@
   <title>Iowa State Colored Convention: Des Moines, 1868</title>
 
   <!-- Leaflet -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
-      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-      crossorigin=""/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
   <script src="https://kit.fontawesome.com/3625013d3b.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="css/leaflet.extra-markers.min.css">
 
 
   <style>
     body {
-        margin: 0px;
-        height: 100%;
-        width: 100%;
+      margin: 0px;
+      height: 100%;
+      width: 100%;
     }
 
     /* Add DC Convention image to header */
@@ -34,7 +32,7 @@
     }
 
     /* Set and style fonts for text in map */
-    h1{
+    h1 {
       font-family: 'Playfair Display SC', serif;
       font-size: 30px;
       display: inline-block;
@@ -45,6 +43,7 @@
       margin-right: 0.0em;
       font-weight: normal;
     }
+
     h2 {
       font-family: 'Playfair Display', serif;
       font-size: 13px;
@@ -56,6 +55,7 @@
       margin-right: 0.0em;
       font-weight: normal;
     }
+
     h3 {
       font-family: 'Playfair Display SC', serif;
       font-size: 16px;
@@ -66,6 +66,7 @@
       margin-right: 0.0em;
       font-weight: normal;
     }
+
     h4 {
       font-family: 'Playfair Display', serif;
       font-size: 12px;
@@ -89,9 +90,11 @@
     .leaflet-popup-content-wrapper {
       background-color: #f2eecb;
     }
+
     .leaflet-popup-tip {
       background: #f2eecb;
     }
+
     /* Set background color of layer control */
     .leaflet-control-layers-expanded {
       font-family: 'Playfair Display', serif;
@@ -104,24 +107,22 @@
 
 <body>
   <header>
-        <h1>Iowa State Colored Convention: Des Moines, 1868</h1><br>
-        <h2>Map by <a href = 'https://jebowe3.github.io/Map-Portfolio/' style='color:#000000;'>Jay Bowen</a>, 2020 | Markers customized with <a href = 'https://github.com/coryasilva/Leaflet.ExtraMarkers' style='color:#000000;'>Leaflet Extra Markers</a> and <a href = 'https://github.com/lvoogdt/Leaflet.awesome-markers' style='color:#000000;'>Leaflet Awesome Markers</a>, based on <a href = 'https://fontawesome.com/license' style='color:#000000;'>Font Awesome</a> icons</h2>
+    <h1>Iowa State Colored Convention: Des Moines, 1868</h1><br>
+    <h2>Map by <a href='https://jebowe3.github.io/Map-Portfolio/' style='color:#000000;'>Jay Bowen</a>, 2020 | Markers customized with <a href='https://github.com/coryasilva/Leaflet.ExtraMarkers' style='color:#000000;'>Leaflet Extra Markers</a> and
+      <a href='https://github.com/lvoogdt/Leaflet.awesome-markers' style='color:#000000;'>Leaflet Awesome Markers</a>, based on <a href='https://fontawesome.com/license' style='color:#000000;'>Font Awesome</a> icons</h2>
   </header>
   <div id="map"></div>
   <script src="https://d3js.org/d3.v4.min.js"></script>
-  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
-      integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
-      crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
   <script src="js/leaflet_awesome_markers.js"></script>
   <script src="js/leaflet.extra-markers.min.js"></script>
   <script src="https://unpkg.com/leaflet-swoopy"></script>
 
   <script>
-
     // Map
     var map = L.map('map', {
       center: [41.974961382786724, -93.36946049692045],
-      //zoom: 7.5,
+      zoom: 7.5,
       minZoom: 5,
       maxZoom: 10,
       zoomSnap: 0.5
@@ -146,13 +147,13 @@
     }).addTo(map);
 
 
-
+/*
     // Fit to overlay bounds (SW and NE points with (lat, lon))
     map.fitBounds([
       [40.08989596314599, -89.68111936673868],
       [43.860026802427456, -97.05780162710222]
     ]);
-
+*/
     // add a scale bar
     L.control.scale().addTo(map);
 
@@ -196,28 +197,28 @@
       // add content to popup window using the education Leaflet GeoJSON layer properties
       communities.eachLayer(function(layer) {
 
-          // define props variable to easily access layer properties
-          var props = layer.feature.properties;
+        // define props variable to easily access layer properties
+        var props = layer.feature.properties;
 
-          // add swoopy arrows
-          L.swoopyArrow([props.Y_Lat, props.X_Long], [41.593611, -93.628056], {
-            color: '#8b0000',
-            opacity: 0.5,
-            weight: 2,
-            hideArrowHead: true
-          }).addTo(map);
+        // add swoopy arrows
+        L.swoopyArrow([props.Y_Lat, props.X_Long], [41.593611, -93.628056], {
+          color: '#8b0000',
+          opacity: 0.5,
+          weight: 2,
+          hideArrowHead: true
+        }).addTo(map);
 
-          layer.bindPopup("<h3>" + props.Community + "</h3><br>" +
-                          "<h4>About: " + props.Community_Info +
-                          "<br>Demographics: " + props.Demographics +
-                          "<br>Delegates: " + props.Delegates + "</h4>" // add website
-                          , {
-                            maxHeight: 300,
-                            minWidth: 200
-                          });
-          layer.on('click', function (e) {
-            this.openPopup();
+        layer.bindPopup("<h3>" + props.Community + "</h3><br>" +
+          "<h4>About: " + props.Community_Info +
+          "<br>Demographics: " + props.Demographics +
+          "<br>Delegates: " + props.Delegates + "</h4>" // add website
+          , {
+            maxHeight: 300,
+            minWidth: 200
           });
+        layer.on('click', function(e) {
+          this.openPopup();
+        });
       });
 
       // designate the layers as overlays
