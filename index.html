@@ -102,6 +102,11 @@
       background-color: #f2eecb;
     }
 
+    /* Set background color of zoom control */
+    .leaflet-bar a{
+      background-color: #f2eecb;
+    }
+
     /* Override will-change CSS attribute to fix map page not fully rendering on Firefox */
     .leaflet-fade-anim .leaflet-tile,.leaflet-zoom-anim .leaflet-zoom-animated { will-change:auto !important; }
 
@@ -128,7 +133,7 @@
       //zoom: 7.5,
       minZoom: 5,
       maxZoom: 10,
-      zoomSnap: 0.5
+      zoomSnap: 0.25
     });
 
     // Fit to overlay bounds (SW and NE points with (lat, lon))
