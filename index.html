@@ -103,13 +103,15 @@
     }
 
     /* Set background color of zoom control */
-    .leaflet-bar a{
+    .leaflet-bar a {
       background-color: #f2eecb;
     }
 
     /* Override will-change CSS attribute to fix map page not fully rendering on Firefox */
-    .leaflet-fade-anim .leaflet-tile,.leaflet-zoom-anim .leaflet-zoom-animated { will-change:auto !important; }
-
+    .leaflet-fade-anim .leaflet-tile,
+    .leaflet-zoom-anim .leaflet-zoom-animated {
+      will-change: auto !important;
+    }
   </style>
 
 </head>
@@ -123,10 +125,9 @@
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
   <script src="js/leaflet.extra-markers.min.js"></script>
-  <script src="https://unpkg.com/leaflet-swoopy"></script>
+  <script src="js/Leaflet.Canvas-Flowmap-Layer.js"></script>
 
   <script>
-
     // Map
     var map = L.map('map', {
       center: [41.974961382786724, -93.36946049692045],
@@ -199,19 +200,54 @@
         }
       }).addTo(map);
 
+      var trips = L.canvasFlowmapLayer(origins, {
+        // required property for this custom layer,
+        // which relies on the property names of your own data
+        originAndDestinationFieldIds: {
+          originUniqueIdField: 'origin_id',
+          originGeometry: {
+            x: 'X_Long',
+            y: 'Y_Lat'
+          },
+          destinationUniqueIdField: 'destination_id',
+          destinationGeometry: {
+            x: 'Burns_Long',
+            y: 'Burns_Lat'
+          }
+        },
+        canvasBezierStyle: {
+          type: 'classBreaks',
+          field: 'Burns_Lat',
+          classBreakInfos: [{
+            classMinValue: 41.593611,
+            classMaxValue: 41.593611,
+            symbol: {
+              strokeStyle: 'rgba(139, 0, 0, 0.5)',
+              lineWidth: 2,
+              lineCap: 'round'
+            }
+          }],
+        },
+        style: function(geoJsonFeature) {
+          if (geoJsonFeature.properties.isOrigin) {
+            return {
+              weight: 0,
+              fillOpacity: 0
+            };
+          } else {
+            return {
+              weight: 0,
+              fillOpacity: 0
+            };
+          }
+        }
+      }).addTo(map);
+
       // add content to popup window using the education Leaflet GeoJSON layer properties
       communities.eachLayer(function(layer) {
 
         // define props variable to easily access layer properties
         var props = layer.feature.properties;
-
-        // add swoopy arrows
-        L.swoopyArrow([props.Y_Lat, props.X_Long], [41.593611, -93.628056], {
-          color: '#8b0000',
-          opacity: 0.5,
-          weight: 2,
-          hideArrowHead: true
-        }).addTo(map);
 
         layer.bindPopup("<h3>" + props.Community + "</h3><br>" +
           "<h4>About: " + props.Community_Info +
@@ -229,7 +265,9 @@
       // designate the layers as overlays
       var overlays = {
         "Convention Site": convention,
-        "Delegate Origins": communities
+        "Delegate Origins": communities,
+        "Delegate Journeys": trips
+        //"Trips": arrow
       };
 
       // all done with the layers, add them to layer control
