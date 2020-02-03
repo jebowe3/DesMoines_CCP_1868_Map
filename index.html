@@ -133,7 +133,7 @@
       //zoom: 7.5,
       minZoom: 5,
       maxZoom: 10,
-      zoomSnap: 0.25
+      zoomSnap: 1
     });
 
     // Fit to overlay bounds (SW and NE points with (lat, lon))
@@ -141,8 +141,6 @@
       [40.535856, -96.446275],
       [43.509765, -90.119228]
     ]);
-
-    setTimeout(function(){ map.invalidateSize()}, 500);
 
     // define the basemap using the thunderforest pioneer map and set minimum and maximum zoom levels
     var basemap = L.tileLayer('https://tile.thunderforest.com/pioneer/{z}/{x}/{y}.png?apikey=dd2dca516d114fd89c0b1403358cbfa8', {
