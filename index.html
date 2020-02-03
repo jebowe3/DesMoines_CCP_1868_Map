@@ -101,6 +101,10 @@
       font-style: italic;
       background-color: #f2eecb;
     }
+
+    /* Override will-change CSS attribute to fix map page not fully rendering on Firefox */
+    .leaflet-fade-anim .leaflet-tile,.leaflet-zoom-anim .leaflet-zoom-animated { will-change:auto !important; }
+
   </style>
 
 </head>
@@ -114,19 +118,25 @@
   <div id="map"></div>
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
-  <script src="js/leaflet_awesome_markers.js"></script>
   <script src="js/leaflet.extra-markers.min.js"></script>
   <script src="https://unpkg.com/leaflet-swoopy"></script>
 
   <script>
+
     // Map
     var map = L.map('map', {
       center: [41.974961382786724, -93.36946049692045],
-      zoom: 7.5,
+      //zoom: 7.5,
       minZoom: 5,
       maxZoom: 10,
       zoomSnap: 0.5
     });
+
+    // Fit to overlay bounds (SW and NE points with (lat, lon))
+    map.fitBounds([
+      [40.535856, -96.446275],
+      [43.509765, -90.119228]
+    ]);
 
     // define the basemap using the thunderforest pioneer map and set minimum and maximum zoom levels
     var basemap = L.tileLayer('https://tile.thunderforest.com/pioneer/{z}/{x}/{y}.png?apikey=dd2dca516d114fd89c0b1403358cbfa8', {
@@ -135,7 +145,6 @@
       maxZoom: 10,
       minZoom: 5,
     }).addTo(map);
-
 
     // Overlay layers (TMS)
     var lyr = L.tileLayer('./{z}/{x}/{y}.png', {
@@ -146,14 +155,6 @@
       maxZoom: 10
     }).addTo(map);
 
-
-/*
-    // Fit to overlay bounds (SW and NE points with (lat, lon))
-    map.fitBounds([
-      [40.08989596314599, -89.68111936673868],
-      [43.860026802427456, -97.05780162710222]
-    ]);
-*/
     // add a scale bar
     L.control.scale().addTo(map);
 
