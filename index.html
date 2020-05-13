@@ -250,9 +250,9 @@
         var props = layer.feature.properties;
 
         layer.bindPopup("<h3>" + props.Community + "</h3><br>" +
-          "<h4>About: " + props.Community_Info +
-          "<br>Demographics: " + props.Demographics +
-          "<br>Delegates: " + props.Delegates + "</h4>" // add website
+          "<br><h4>" + props.Community_Info + "</h4>"
+          //"<br>Demographics: " + props.Demographics +
+          //"<br>Delegates: " + props.Delegates + "</h4>" // add website
           , {
             maxHeight: 300,
             minWidth: 200
