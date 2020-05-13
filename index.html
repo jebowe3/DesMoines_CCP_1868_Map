@@ -217,13 +217,45 @@
         },
         canvasBezierStyle: {
           type: 'classBreaks',
-          field: 'Burns_Lat',
+          field: 'Delegate_Count',
           classBreakInfos: [{
-            classMinValue: 41.593611,
-            classMaxValue: 41.593611,
+            classMinValue: 1,
+            classMaxValue: 1,
             symbol: {
               strokeStyle: 'rgba(139, 0, 0, 0.5)',
               lineWidth: 2,
+              lineCap: 'round'
+            }
+          }, {
+            classMinValue: 2,
+            classMaxValue: 2,
+            symbol: {
+              strokeStyle: 'rgba(139, 0, 0, 0.5)',
+              lineWidth: 4,
+              lineCap: 'round'
+            }
+          }, {
+            classMinValue: 3,
+            classMaxValue: 3,
+            symbol: {
+              strokeStyle: 'rgba(139, 0, 0, 0.5)',
+              lineWidth: 6,
+              lineCap: 'round'
+            }
+          }, {
+            classMinValue: 4,
+            classMaxValue: 4,
+            symbol: {
+              strokeStyle: 'rgba(139, 0, 0, 0.5)',
+              lineWidth: 8,
+              lineCap: 'round'
+            }
+          }, {
+            classMinValue: 5,
+            classMaxValue: 5,
+            symbol: {
+              strokeStyle: 'rgba(139, 0, 0, 0.5)',
+              lineWidth: 10,
               lineCap: 'round'
             }
           }],
@@ -243,16 +275,34 @@
         }
       }).addTo(map);
 
-      // add content to popup window using the education Leaflet GeoJSON layer properties
+      // add content to popup window using the Leaflet GeoJSON layer properties
       communities.eachLayer(function(layer) {
 
         // define props variable to easily access layer properties
         var props = layer.feature.properties;
 
         layer.bindPopup("<h3>" + props.Community + "</h3><br>" +
-          "<br><h4>" + props.Community_Info + "</h4>"
-          //"<br>Demographics: " + props.Demographics +
-          //"<br>Delegates: " + props.Delegates + "</h4>" // add website
+          "<h4>Delegates: " + props.Delegate_Count + "<br>" +
+          "<br>" + props.Community_Info + "</h4>"
+          , {
+            maxHeight: 300,
+            minWidth: 200
+          });
+        layer.on('click', function(e) {
+          this.openPopup();
+        });
+      });
+
+      // add content to popup window using the Leaflet GeoJSON layer properties
+      convention.eachLayer(function(layer) {
+
+        // define props variable to easily access layer properties
+        var props = layer.feature.properties;
+
+        layer.bindPopup("<h3>" + props.Community + "</h3><br>" +
+          "<br><h4>Convention Site:" +
+          "<br>Black Methodist Episcopal Church" +
+          "<br>(Later known as Burns United Methodist Church)</h4>"
           , {
             maxHeight: 300,
             minWidth: 200
